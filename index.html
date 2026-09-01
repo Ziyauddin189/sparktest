@@ -1,729 +1,830 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
-  <title>Spark Academy · Exam Results</title>
-  <style>
-    /* ---------- reset & base ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>Spark Academy · Exam Results</title>
+    <style>
+        /* ---------- reset & base ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      background: #f4f7fc;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1.5rem;
-      margin: 0;
-      line-height: 1.5;
-      color: #1e2b3a;
-    }
+        body {
+            background: #f4f7fc;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            margin: 0;
+            line-height: 1.5;
+            color: #1e2b3a;
+        }
 
-    /* ---------- main card container ---------- */
-    .result-wrapper {
-      max-width: 820px;
-      width: 100%;
-      background: #ffffff;
-      border-radius: 32px;
-      box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.25), 0 8px 24px -6px rgba(0, 0, 0, 0.08);
-      padding: 2rem 2rem 2.5rem;
-      transition: box-shadow 0.2s;
-    }
+        /* ---------- main card container ---------- */
+        .result-wrapper {
+            max-width: 820px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.25), 0 8px 24px -6px rgba(0, 0, 0, 0.08);
+            padding: 2rem 2rem 2.5rem;
+            transition: box-shadow 0.2s;
+        }
 
-    /* ---------- header ---------- */
-    .academy-header {
-      text-align: center;
-      border-bottom: 2px solid #eef3f8;
-      padding-bottom: 1rem;
-      margin-bottom: 1.8rem;
-    }
+        /* ---------- header ---------- */
+        .academy-header {
+            text-align: center;
+            border-bottom: 2px solid #eef3f8;
+            padding-bottom: 1rem;
+            margin-bottom: 1.8rem;
+        }
 
-    .academy-header img.banner {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-      border-radius: 16px;
-    }
+        .academy-header img.banner {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 16px;
+        }
 
-    /* ---------- search section ---------- */
-    .search-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-      justify-content: center;
-      background: #f8faff;
-      padding: 1.2rem 1.5rem;
-      border-radius: 60px;
-      margin-bottom: 1.8rem;
-      box-shadow: inset 0 1px 4px rgba(0,0,0,0.02);
-    }
+        /* ---------- search section ---------- */
+        .search-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+            justify-content: center;
+            background: #f8faff;
+            padding: 1.2rem 1.5rem;
+            border-radius: 60px;
+            margin-bottom: 1.8rem;
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.02);
+        }
 
-    .search-section input {
-      flex: 2 1 220px;
-      min-width: 180px;
-      padding: 0.75rem 1.2rem;
-      border: 1px solid #d9e2ec;
-      border-radius: 40px;
-      font-size: 1rem;
-      background: white;
-      transition: border 0.15s, box-shadow 0.15s;
-      outline: none;
-      font-weight: 450;
-      color: #1a2b3c;
-    }
+        .search-section input {
+            flex: 2 1 220px;
+            min-width: 180px;
+            padding: 0.75rem 1.2rem;
+            border: 1px solid #d9e2ec;
+            border-radius: 40px;
+            font-size: 1rem;
+            background: white;
+            transition: border 0.15s, box-shadow 0.15s;
+            outline: none;
+            font-weight: 450;
+            color: #1a2b3c;
+        }
 
-    .search-section input::placeholder {
-      color: #8ba0b5;
-      font-weight: 400;
-    }
+        .search-section input::placeholder {
+            color: #8ba0b5;
+            font-weight: 400;
+        }
 
-    .search-section input:focus {
-      border-color: #2a7de1;
-      box-shadow: 0 0 0 3px rgba(42, 125, 225, 0.15);
-    }
+        .search-section input:focus {
+            border-color: #2a7de1;
+            box-shadow: 0 0 0 3px rgba(42, 125, 225, 0.15);
+        }
 
-    .search-section button {
-      flex: 0 0 auto;
-      background: #0b2a41;
-      color: white;
-      border: none;
-      padding: 0.75rem 2rem;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 1rem;
-      letter-spacing: 0.3px;
-      cursor: pointer;
-      transition: background 0.15s, transform 0.1s;
-      box-shadow: 0 4px 8px -2px rgba(11, 42, 65, 0.2);
-      white-space: nowrap;
-    }
+        .search-section button {
+            flex: 0 0 auto;
+            background: #0b2a41;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            transition: background 0.15s, transform 0.1s;
+            box-shadow: 0 4px 8px -2px rgba(11, 42, 65, 0.2);
+            white-space: nowrap;
+        }
 
-    .search-section button:hover {
-      background: #1a3f5e;
-    }
+        .search-section button:hover {
+            background: #1a3f5e;
+        }
 
-    .search-section button:active {
-      transform: scale(0.96);
-      background: #0a2539;
-    }
+        .search-section button:active {
+            transform: scale(0.96);
+            background: #0a2539;
+        }
 
-    /* ---------- error message ---------- */
-    .error-msg {
-      background: #fef0ee;
-      color: #b34033;
-      padding: 0.8rem 1.2rem;
-      border-radius: 40px;
-      font-weight: 500;
-      text-align: center;
-      margin-top: -0.5rem;
-      margin-bottom: 1.2rem;
-      border-left: 4px solid #b34033;
-      display: none;
-    }
+        /* ---------- error message ---------- */
+        .error-msg {
+            background: #fef0ee;
+            color: #b34033;
+            padding: 0.8rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            text-align: center;
+            margin-top: -0.5rem;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid #b34033;
+            display: none;
+        }
 
-    .error-msg.show {
-      display: block;
-    }
+        .error-msg.show {
+            display: block;
+        }
 
-    /* ---------- result card (hidden initially) ---------- */
-    .result-card {
-      display: none;
-      animation: fadeSlide 0.35s ease forwards;
-      margin-top: 0.5rem;
-    }
+        /* ---------- result card (hidden initially) ---------- */
+        .result-card {
+            display: none;
+            animation: fadeSlide 0.35s ease forwards;
+            margin-top: 0.5rem;
+        }
 
-    .result-card.show {
-      display: block;
-    }
+        .result-card.show {
+            display: block;
+        }
 
-    @keyframes fadeSlide {
-      0% { opacity: 0; transform: translateY(8px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(8px);
+            }
 
-    /* ---------- student info ---------- */
-    .student-info {
-      background: #f9fcff;
-      border-radius: 24px;
-      padding: 1.5rem 1.8rem;
-      margin-bottom: 1.8rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.5rem 1.8rem;
-      border: 1px solid #eaf1f8;
-    }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .info-item {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      padding: 0.25rem 0;
-    }
+        /* ---------- student info ---------- */
+        .student-info {
+            background: #f9fcff;
+            border-radius: 24px;
+            padding: 1.5rem 1.8rem;
+            margin-bottom: 1.8rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem 1.8rem;
+            border: 1px solid #eaf1f8;
+        }
 
-    .info-item .label {
-      font-weight: 500;
-      color: #436074;
-      min-width: 100px;
-      font-size: 0.9rem;
-      letter-spacing: 0.2px;
-    }
+        .info-item {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            padding: 0.25rem 0;
+        }
 
-    .info-item .value {
-      font-weight: 600;
-      color: #0b2a41;
-      word-break: break-word;
-    }
+        .info-item .label {
+            font-weight: 500;
+            color: #436074;
+            min-width: 100px;
+            font-size: 0.9rem;
+            letter-spacing: 0.2px;
+        }
 
-    .info-item .value.highlight {
-      background: #e2edfb;
-      padding: 0.1rem 0.8rem;
-      border-radius: 30px;
-      font-size: 1.1rem;
-    }
+        .info-item .value {
+            font-weight: 600;
+            color: #0b2a41;
+            word-break: break-word;
+        }
 
-    /* ---------- marks table ---------- */
-    .marks-section {
-      background: white;
-      border-radius: 20px;
-      border: 1px solid #eaf1f8;
-      overflow: hidden;
-      margin-bottom: 1.2rem;
-    }
+        .info-item .value.highlight {
+            background: #e2edfb;
+            padding: 0.1rem 0.8rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+        }
 
-    .marks-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.98rem;
-    }
+        .info-item .value.rank-highlight {
+            background: #e2edfb;
+            color: #0b2a41;
+            font-weight: 700;
+        }
 
-    .marks-table th {
-      background: #f2f7fd;
-      color: #1d3b54;
-      font-weight: 600;
-      padding: 0.9rem 1rem;
-      text-align: left;
-      border-bottom: 2px solid #d9e2ec;
-      letter-spacing: 0.3px;
-    }
+        .info-item .value.rank-1 {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fcd34d;
+        }
 
-    .marks-table td {
-      padding: 0.8rem 1rem;
-      border-bottom: 1px solid #e9eff5;
-      color: #1f3346;
-    }
+        .info-item .value.rank-2 {
+            background: #f1f5f9;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+        }
 
-    .marks-table tr:last-child td {
-      border-bottom: none;
-    }
+        .info-item .value.rank-3 {
+            background: #ffedd5;
+            color: #9a3412;
+            border: 1px solid #fdba74;
+        }
 
-    .marks-table .subject-cell {
-      font-weight: 500;
-    }
+        /* ---------- marks table ---------- */
+        .marks-section {
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #eaf1f8;
+            overflow: hidden;
+            margin-bottom: 1.2rem;
+        }
 
-    .marks-table .score-cell {
-      font-weight: 600;
-    }
+        .marks-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.98rem;
+        }
 
-    /* total score row */
-    .total-row td {
-      background: #f2f8ff;
-      font-weight: 700;
-      padding: 0.9rem 1rem;
-      border-top: 2px solid #cbdae7;
-      color: #0b2a41;
-    }
+        .marks-table th {
+            background: #f2f7fd;
+            color: #1d3b54;
+            font-weight: 600;
+            padding: 0.9rem 1rem;
+            text-align: left;
+            border-bottom: 2px solid #d9e2ec;
+            letter-spacing: 0.3px;
+        }
 
-    .total-row .total-label {
-      text-align: right;
-      padding-right: 1rem;
-      font-weight: 600;
-      color: #1d3b54;
-    }
+        .marks-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #e9eff5;
+            color: #1f3346;
+        }
 
-    .total-row .total-value {
-      font-size: 1.2rem;
-      background: #0b2a41;
-      color: white;
-      padding: 0.2rem 1.2rem;
-      border-radius: 40px;
-      display: inline-block;
-      letter-spacing: 0.5px;
-    }
+        .marks-table tr:last-child td {
+            border-bottom: none;
+        }
 
-    /* ---------- footer / extra ---------- */
-    .footer-note {
-      text-align: center;
-      font-size: 0.8rem;
-      color: #7a94ab;
-      margin-top: 1.5rem;
-      border-top: 1px solid #eef3f8;
-      padding-top: 1.2rem;
-      letter-spacing: 0.3px;
-    }
+        .marks-table .subject-cell {
+            font-weight: 500;
+        }
 
-    /* ---------- responsive ---------- */
-    @media (max-width: 640px) {
-      .result-wrapper {
-        padding: 1.5rem 1rem;
-      }
+        .marks-table .score-cell {
+            font-weight: 600;
+        }
 
-      .search-section {
-        border-radius: 40px;
-        padding: 1rem 1.2rem;
-        flex-direction: column;
-        align-items: stretch;
-        background: #f8faff;
-      }
+        /* total score row */
+        .total-row td {
+            background: #f2f8ff;
+            font-weight: 700;
+            padding: 0.9rem 1rem;
+            border-top: 2px solid #cbdae7;
+            color: #0b2a41;
+        }
 
-      .search-section input {
-        flex: 1 1 auto;
-        width: 100%;
-        min-width: unset;
-      }
+        .total-row .total-label {
+            text-align: right;
+            padding-right: 1rem;
+            font-weight: 600;
+            color: #1d3b54;
+        }
 
-      .search-section button {
-        width: 100%;
-        justify-content: center;
-        padding: 0.75rem;
-      }
+        .total-row .total-value {
+            font-size: 1.2rem;
+            background: #0b2a41;
+            color: white;
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
 
-      .student-info {
-        grid-template-columns: 1fr;
-        gap: 0.25rem;
-        padding: 1.2rem;
-      }
+        /* ---------- footer / extra ---------- */
+        .footer-note {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #7a94ab;
+            margin-top: 1.5rem;
+            border-top: 1px solid #eef3f8;
+            padding-top: 1.2rem;
+            letter-spacing: 0.3px;
+        }
 
-      .info-item .label {
-        min-width: 80px;
-      }
+        /* ---------- responsive ---------- */
+        @media (max-width: 640px) {
+            .result-wrapper {
+                padding: 1.5rem 1rem;
+            }
 
-      .marks-table th,
-      .marks-table td {
-        padding: 0.6rem 0.7rem;
-        font-size: 0.9rem;
-      }
+            .search-section {
+                border-radius: 40px;
+                padding: 1rem 1.2rem;
+                flex-direction: column;
+                align-items: stretch;
+                background: #f8faff;
+            }
 
-      .total-row .total-value {
-        font-size: 1rem;
-        padding: 0.1rem 1rem;
-      }
-    }
+            .search-section input {
+                flex: 1 1 auto;
+                width: 100%;
+                min-width: unset;
+            }
 
-    @media (max-width: 420px) {
-      .result-wrapper {
-        padding: 1rem 0.75rem;
-      }
-    }
-  </style>
+            .search-section button {
+                width: 100%;
+                justify-content: center;
+                padding: 0.75rem;
+            }
+
+            .student-info {
+                grid-template-columns: 1fr;
+                gap: 0.25rem;
+                padding: 1.2rem;
+            }
+
+            .info-item .label {
+                min-width: 80px;
+            }
+
+            .marks-table th,
+            .marks-table td {
+                padding: 0.6rem 0.7rem;
+                font-size: 0.9rem;
+            }
+
+            .total-row .total-value {
+                font-size: 1rem;
+                padding: 0.1rem 1rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .result-wrapper {
+                padding: 1rem 0.75rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="result-wrapper">
+    <div class="result-wrapper">
 
-  <!-- header -->
-  <div class="academy-header">
-    <img class="banner" src="images/banner.png" alt="Spark Academy - Examination Result 2026">
-  </div>
+        <!-- header -->
+        <div class="academy-header">
+            <img class="banner" src="images/banner.png" alt="Spark Academy - Examination Result 2026">
+        </div>
 
-  <!-- search -->
-  <div class="search-section">
-    <input type="text" id="hallTicketInput" placeholder="Enter Hall Ticket Number" autofocus>
-    <button id="viewResultBtn">View Result</button>
-  </div>
+        <!-- search -->
+        <div class="search-section">
+            <input type="text" id="hallTicketInput" placeholder="Enter Hall Ticket Number" autofocus>
+            <button id="viewResultBtn">View Result</button>
+        </div>
 
-  <!-- error message -->
-  <div id="errorMsg" class="error-msg">No result found for this Hall Ticket Number.</div>
+        <!-- error message -->
+        <div id="errorMsg" class="error-msg">No result found for this Hall Ticket Number.</div>
 
-  <!-- result card (hidden by default) -->
-  <div id="resultCard" class="result-card">
+        <!-- result card (hidden by default) -->
+        <div id="resultCard" class="result-card">
 
-    <!-- student info -->
-    <div class="student-info" id="studentInfo">
-      <div class="info-item"><span class="label">Name</span><span class="value" id="studentName">—</span></div>
-      <div class="info-item"><span class="label">Hall Ticket</span><span class="value" id="studentHallTicket">—</span></div>
-      <div class="info-item"><span class="label">Batch</span><span class="value" id="studentBatch">—</span></div>
-      <div class="info-item"><span class="label">School</span><span class="value" id="studentSchool">—</span></div>
-      <div class="info-item" style="grid-column: 1 / -1; margin-top: 0.2rem;">
-        <span class="label">Total Score</span>
-        <span class="value highlight" id="studentTotal">—</span>
-      </div>
+            <!-- student info -->
+            <div class="student-info" id="studentInfo">
+                <div class="info-item"><span class="label">Name</span><span class="value" id="studentName">—</span>
+                </div>
+                <div class="info-item"><span class="label">Hall Ticket</span><span class="value"
+                        id="studentHallTicket">—</span></div>
+                <div class="info-item"><span class="label">Batch</span><span class="value" id="studentBatch">—</span>
+                </div>
+                <div class="info-item"><span class="label">School</span><span class="value" id="studentSchool">—</span>
+                </div>
+                <div class="info-item" style="margin-top: 0.2rem;">
+                    <span class="label">Rank</span>
+                    <span class="value highlight rank-highlight" id="studentRank">—</span>
+                </div>
+                <div class="info-item" style="margin-top: 0.2rem;">
+                    <span class="label">Total Score</span>
+                    <span class="value highlight" id="studentTotal">—</span>
+                </div>
+            </div>
+
+            <!-- marks table -->
+            <div class="marks-section">
+                <table class="marks-table" id="marksTable">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Max Marks</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody id="marksTableBody">
+                        <!-- rows inserted by js -->
+                    </tbody>
+                    <tfoot id="marksTableFoot">
+                        <tr class="total-row">
+                            <td colspan="2" class="total-label">Total</td>
+                            <td class="total-value" id="totalScoreFooter">—</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+        </div><!-- /result-card -->
+
+        <div class="footer-note">© 2026 Spark Academy · Results published by Spark Academy, Nellore</div>
     </div>
 
-    <!-- marks table -->
-    <div class="marks-section">
-      <table class="marks-table" id="marksTable">
-        <thead>
-          <tr><th>Subject</th><th>Max Marks</th><th>Score</th></tr>
-        </thead>
-        <tbody id="marksTableBody">
-          <!-- rows inserted by js -->
-        </tbody>
-        <tfoot id="marksTableFoot">
-          <tr class="total-row">
-            <td colspan="2" class="total-label">Total</td>
-            <td class="total-value" id="totalScoreFooter">—</td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
+    <script>
 
-  </div><!-- /result-card -->
 
-  <div class="footer-note">© 2026 Spark Academy · Results published by Spark Academy, Nellore</div>
-</div>
+        const results = {
 
-<script>
-  
+            //RANK 1
+            "SPARK2026017": {
+                name: "MOHAMMED HAFSA",
+                batch: "2026 - 27",
+                schoolName: "PNMC HIGH SCHOOL",
+                totalScore: "19 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 7 },
+                    { subject: "Physics", maxMarks: 10, score: 10 },
+                    { subject: "Chemistry", maxMarks: 10, score: 2 }
+                ]
+            },
+            "SPARK2026015": {
+                name: "A. ISHWARYA",
+                batch: "2026 - 27",
+                schoolName: "PNMC HIGH SCHOOL",
+                totalScore: "19 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 5 },
+                    { subject: "Physics", maxMarks: 10, score: 8 },
+                    { subject: "Chemistry", maxMarks: 10, score: 6 }
+                ]
+            },
 
-  const results = {
+            //RANK 2
 
-    //RANK 1
-    "SPARK2026017": {
-      name: "MOHAMMED HAFSA",
-      batch: "2026 - 27",
-      schoolName: "PNMC HIGH SCHOOL",
-      totalScore: "19 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 7 },
-        { subject: "Physics", maxMarks: 10, score: 10 },
-        { subject: "Chemistry", maxMarks: 10, score: 2 }
-      ]
-    },
-    "SPARK2026015": {
-      name: "A. ISHWARYA",
-      batch: "2026 - 27",
-      schoolName: "PNMC HIGH SCHOOL",
-      totalScore: "19 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 5 },
-        { subject: "Physics", maxMarks: 10, score: 8 },
-        { subject: "Chemistry", maxMarks: 10, score: 6 }
-      ]
-    },
+            "SPARK2026029": {
+                name: "SK ALMAAS THABASUM",
+                batch: "2026 - 27",
+                schoolName: "PNMC HIGH SCHOOL",
+                totalScore: "17 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 8 },
+                    { subject: "Physics", maxMarks: 10, score: 4 },
+                    { subject: "Chemistry", maxMarks: 10, score: 5 }
+                ]
+            },
 
-    //RANK 2
+            //RANK 3
 
-     "SPARK2026029": {
-      name: "SK ALMAAS THABASUM",
-      batch: "2026 - 27",
-      schoolName: "PNMC HIGH SCHOOL",
-      totalScore: "17 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 8 },
-        { subject: "Physics", maxMarks: 10, score: 4 },
-        { subject: "Chemistry", maxMarks: 10, score: 5 }
-      ]
-    },
+            "SPARK2026020": {
+                name: "BHOOMIKA",
+                batch: "2026 - 27",
+                schoolName: "PNMC HIGH SCHOOL",
+                totalScore: "16 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 4 },
+                    { subject: "Physics", maxMarks: 10, score: 7 },
+                    { subject: "Chemistry", maxMarks: 10, score: 5 }
+                ]
+            },
 
-    //RANK 3
-
-    "SPARK2026020": {
-      name: "BHOOMIKA",
-      batch: "2026 - 27",
-      schoolName: "PNMC HIGH SCHOOL",
-      totalScore: "16 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 4 },
-        { subject: "Physics", maxMarks: 10, score: 7 },
-        { subject: "Chemistry", maxMarks: 10, score: 5 }
-      ]
-    },
-
-    "SPARK2026018": {
-      name: "SHAIK AFREEN",
-      batch: "2026 - 27",
-      schoolName: "PNMC HIGH SCHOOL",
-      totalScore: "16 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 3 },
-        { subject: "Physics", maxMarks: 10, score: 6 },
-        { subject: "Chemistry", maxMarks: 10, score: 7 }
-      ]
-    },
+            "SPARK2026018": {
+                name: "SHAIK AFREEN",
+                batch: "2026 - 27",
+                schoolName: "PNMC HIGH SCHOOL",
+                totalScore: "16 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 3 },
+                    { subject: "Physics", maxMarks: 10, score: 6 },
+                    { subject: "Chemistry", maxMarks: 10, score: 7 }
+                ]
+            },
 
 
 
-    "SPARK2026004": {
-      name: "SHAIK ASNA ANJUM",
-      batch: "2026 - 27",
-      schoolName: "CITIZEN E.M HIGH SCHOOL",
-      totalScore: "13 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 8 },
-        { subject: "Physics", maxMarks: 10, score: 1 },
-        { subject: "Chemistry", maxMarks: 10, score: 4 }
-      ]
-    },
-
-    
-    "SPARK2026033": {
-      name: "SHAIK SHAZIYA",
-      batch: "2026 - 27",
-      schoolName: "CITIZEN E.M HIGH SCHOOL",
-      totalScore: "14 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 9 },
-        { subject: "Physics", maxMarks: 10, score: 1 },
-        { subject: "Chemistry", maxMarks: 10, score: 4 }
-      ]
-    },
-
-    "SPARK2026014": {
-      name: "SHAIK MOHAMMED SUHEL",
-      batch: "2026 - 27",
-      schoolName: "CITIZEN E.M HIGH SCHOOL",
-      totalScore: "11 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 6 },
-        { subject: "Physics", maxMarks: 10, score: 1 },
-        { subject: "Chemistry", maxMarks: 10, score: 4 }
-      ]
-    },
-
-    "SPARK2026027": {
-      name: "V THANVI",
-      batch: "2026 - 27",
-      schoolName: "PNMC HIGH SCHOOL",
-      totalScore: "9 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 4 },
-        { subject: "Physics", maxMarks: 10, score: 4 },
-        { subject: "Chemistry", maxMarks: 10, score: 1 }
-      ]
-    },
+            "SPARK2026004": {
+                name: "SHAIK ASNA ANJUM",
+                batch: "2026 - 27",
+                schoolName: "CITIZEN E.M HIGH SCHOOL",
+                totalScore: "13 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 8 },
+                    { subject: "Physics", maxMarks: 10, score: 1 },
+                    { subject: "Chemistry", maxMarks: 10, score: 4 }
+                ]
+            },
 
 
-    "SPARK2026022": {
-      name: "SHAIK FASIHA",
-      batch: "2026 - 27",
-      schoolName: "PNMC HIGH SCHOOL",
-      totalScore: "7 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 3 },
-        { subject: "Physics", maxMarks: 10, score: 2 },
-        { subject: "Chemistry", maxMarks: 10, score: 2 }
-      ]
-    },
+            "SPARK2026033": {
+                name: "SHAIK SHAZIYA",
+                batch: "2026 - 27",
+                schoolName: "CITIZEN E.M HIGH SCHOOL",
+                totalScore: "14 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 9 },
+                    { subject: "Physics", maxMarks: 10, score: 1 },
+                    { subject: "Chemistry", maxMarks: 10, score: 4 }
+                ]
+            },
+
+            "SPARK2026014": {
+                name: "SHAIK MOHAMMED SUHEL",
+                batch: "2026 - 27",
+                schoolName: "CITIZEN E.M HIGH SCHOOL",
+                totalScore: "11 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 6 },
+                    { subject: "Physics", maxMarks: 10, score: 1 },
+                    { subject: "Chemistry", maxMarks: 10, score: 4 }
+                ]
+            },
+
+            "SPARK2026027": {
+                name: "V THANVI",
+                batch: "2026 - 27",
+                schoolName: "PNMC HIGH SCHOOL",
+                totalScore: "9 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 4 },
+                    { subject: "Physics", maxMarks: 10, score: 4 },
+                    { subject: "Chemistry", maxMarks: 10, score: 1 }
+                ]
+            },
 
 
-    "SPARK2026008": {
-      name: "SYED SHAFIYA SULTHANA",
-      batch: "2026 - 27",
-      schoolName: "CITIZEN E.M HIGH SCHOOL",
-      totalScore: "14 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 8 },
-        { subject: "Physics", maxMarks: 10, score: 2 },
-        { subject: "Chemistry", maxMarks: 10, score: 4 }
-      ]
-    },
-
-    "SPARK2026005": {
-      name: "SHAIK SUHANA TAMKEEN",
-      batch: "2026 - 27",
-      schoolName: "CITIZEN E.M HIGH SCHOOL",
-      totalScore: "12 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 6 },
-        { subject: "Physics", maxMarks: 10, score: 3 },
-        { subject: "Chemistry", maxMarks: 10, score: 3 }
-      ]
-    },
+            "SPARK2026022": {
+                name: "SHAIK FASIHA",
+                batch: "2026 - 27",
+                schoolName: "PNMC HIGH SCHOOL",
+                totalScore: "7 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 3 },
+                    { subject: "Physics", maxMarks: 10, score: 2 },
+                    { subject: "Chemistry", maxMarks: 10, score: 2 }
+                ]
+            },
 
 
-   "SPARK2026026": {
-      name: "B NIDHISHA",
-      batch: "2026 - 27",
-      schoolName: "PNMC HIGH SCHOOL",
-      totalScore: "11 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 4 },
-        { subject: "Physics", maxMarks: 10, score: 5 },
-        { subject: "Chemistry", maxMarks: 10, score: 2 }
-      ]
-    },
+            "SPARK2026008": {
+                name: "SYED SHAFIYA SULTHANA",
+                batch: "2026 - 27",
+                schoolName: "CITIZEN E.M HIGH SCHOOL",
+                totalScore: "14 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 8 },
+                    { subject: "Physics", maxMarks: 10, score: 2 },
+                    { subject: "Chemistry", maxMarks: 10, score: 4 }
+                ]
+            },
+
+            "SPARK2026005": {
+                name: "SHAIK SUHANA TAMKEEN",
+                batch: "2026 - 27",
+                schoolName: "CITIZEN E.M HIGH SCHOOL",
+                totalScore: "12 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 6 },
+                    { subject: "Physics", maxMarks: 10, score: 3 },
+                    { subject: "Chemistry", maxMarks: 10, score: 3 }
+                ]
+            },
 
 
-    "SPARK2026031": {
-      name: "T SUVARNA",
-      batch: "2026 - 27",
-      schoolName: "PNMC HIGH SCHOOL",
-      totalScore: "0 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 0 },
-        { subject: "Physics", maxMarks: 10, score: 0 },
-        { subject: "Chemistry", maxMarks: 10, score: 0 }
-      ]
-    },
-
-    "SPARK2026025": {
-      name: "B SRUTHI",
-      batch: "2026 - 27",
-      schoolName: "PNMC HIGH SCHOOL",
-      totalScore: "1 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 0 },
-        { subject: "Physics", maxMarks: 10, score: 1 },
-        { subject: "Chemistry", maxMarks: 10, score: 0 }
-      ]
-    },
-
-    "SPARK2026010": {
-      name: "SK RUKSANA ANJUM",
-      batch: "2026 - 27",
-      schoolName: "CITIZEN E.M HIGH SCHOOL",
-      totalScore: "16 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 8 },
-        { subject: "Physics", maxMarks: 10, score: 4 },
-        { subject: "Chemistry", maxMarks: 10, score: 4 }
-      ]
-    },
-
-    "SPARK2026019": {
-      name: "SK BIBIJAN",
-      batch: "2026 - 27",
-      schoolName: "PNMC HIGH SCHOOL",
-      totalScore: "6 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 0 },
-        { subject: "Physics", maxMarks: 10, score: 3 },
-        { subject: "Chemistry", maxMarks: 10, score: 3 }
-      ]
-    },
-
-    "SPARK2026021": {
-      name: "P AMEENA",
-      batch: "2026 - 27",
-      schoolName: "PNMC HIGH SCHOOL",
-      totalScore: "11 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 4 },
-        { subject: "Physics", maxMarks: 10, score: 3 },
-        { subject: "Chemistry", maxMarks: 10, score: 4 }
-      ]
-    },
+            "SPARK2026026": {
+                name: "B NIDHISHA",
+                batch: "2026 - 27",
+                schoolName: "PNMC HIGH SCHOOL",
+                totalScore: "11 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 4 },
+                    { subject: "Physics", maxMarks: 10, score: 5 },
+                    { subject: "Chemistry", maxMarks: 10, score: 2 }
+                ]
+            },
 
 
-    "SPARK2026024": {
-      name: "SHAIK ARSHIYA",
-      batch: "2026 - 27",
-      schoolName: "PNMC HIGH SCHOOL",
-      totalScore: "6 / 30",
-      subjects: [
-        { subject: "Maths", maxMarks: 10, score: 1 },
-        { subject: "Physics", maxMarks: 10, score: 3 },
-        { subject: "Chemistry", maxMarks: 10, score: 2 }
-      ]
-    },
-    
-  };
+            "SPARK2026031": {
+                name: "T SUVARNA",
+                batch: "2026 - 27",
+                schoolName: "PNMC HIGH SCHOOL",
+                totalScore: "0 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 0 },
+                    { subject: "Physics", maxMarks: 10, score: 0 },
+                    { subject: "Chemistry", maxMarks: 10, score: 0 }
+                ]
+            },
 
-  /* ============================================================
-     ～～～  DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING  ～～～
-     ============================================================ */
+            "SPARK2026025": {
+                name: "B SRUTHI",
+                batch: "2026 - 27",
+                schoolName: "PNMC HIGH SCHOOL",
+                totalScore: "1 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 0 },
+                    { subject: "Physics", maxMarks: 10, score: 1 },
+                    { subject: "Chemistry", maxMarks: 10, score: 0 }
+                ]
+            },
 
-  (function() {
-    // DOM refs
-    const input = document.getElementById('hallTicketInput');
-    const btn = document.getElementById('viewResultBtn');
-    const errorMsg = document.getElementById('errorMsg');
-    const resultCard = document.getElementById('resultCard');
+            "SPARK2026010": {
+                name: "SK RUKSANA ANJUM",
+                batch: "2026 - 27",
+                schoolName: "CITIZEN E.M HIGH SCHOOL",
+                totalScore: "16 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 8 },
+                    { subject: "Physics", maxMarks: 10, score: 4 },
+                    { subject: "Chemistry", maxMarks: 10, score: 4 }
+                ]
+            },
 
-    // student info fields
-    const studentName = document.getElementById('studentName');
-    const studentHallTicket = document.getElementById('studentHallTicket');
-    const studentBatch = document.getElementById('studentBatch');
-    const studentSchool = document.getElementById('studentSchool');
-    const studentTotal = document.getElementById('studentTotal');
-    const totalScoreFooter = document.getElementById('totalScoreFooter');
-    const marksTableBody = document.getElementById('marksTableBody');
+            "SPARK2026019": {
+                name: "SK BIBIJAN",
+                batch: "2026 - 27",
+                schoolName: "PNMC HIGH SCHOOL",
+                totalScore: "6 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 0 },
+                    { subject: "Physics", maxMarks: 10, score: 3 },
+                    { subject: "Chemistry", maxMarks: 10, score: 3 }
+                ]
+            },
 
-    // Helper: clear error & hide result
-    function resetUI() {
-      errorMsg.classList.remove('show');
-      resultCard.classList.remove('show');
-    }
+            "SPARK2026021": {
+                name: "P AMEENA",
+                batch: "2026 - 27",
+                schoolName: "PNMC HIGH SCHOOL",
+                totalScore: "11 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 4 },
+                    { subject: "Physics", maxMarks: 10, score: 3 },
+                    { subject: "Chemistry", maxMarks: 10, score: 4 }
+                ]
+            },
 
-    // Render result for a given hall ticket
-    function renderResult(hallTicket) {
-      const student = results[hallTicket];
-      if (!student) {
-        // show error
-        errorMsg.classList.add('show');
-        resultCard.classList.remove('show');
-        return;
-      }
 
-      // hide error, show card
-      errorMsg.classList.remove('show');
-      resultCard.classList.add('show');
+            "SPARK2026024": {
+                name: "SHAIK ARSHIYA",
+                batch: "2026 - 27",
+                schoolName: "PNMC HIGH SCHOOL",
+                totalScore: "6 / 30",
+                subjects: [
+                    { subject: "Maths", maxMarks: 10, score: 1 },
+                    { subject: "Physics", maxMarks: 10, score: 3 },
+                    { subject: "Chemistry", maxMarks: 10, score: 2 }
+                ]
+            },
 
-      // --- fill student info ---
-      studentName.textContent = student.name || '—';
-      studentHallTicket.textContent = hallTicket;
-      studentBatch.textContent = student.batch || '—';
-      studentSchool.textContent = student.schoolName || '—';
-      const totalDisplay = student.totalScore || '—';
-      studentTotal.textContent = totalDisplay;
-      totalScoreFooter.textContent = totalDisplay;
+        };
 
-      // --- build marks table ---
-      const subjects = student.subjects || [];
-      let html = '';
-      if (subjects.length === 0) {
-        html = `<tr><td colspan="3" style="text-align:center; color:#6b7f93;">No subject data</td></tr>`;
-      } else {
-        subjects.forEach(sub => {
-          const subjectName = sub.subject || '—';
-          const maxMarks = sub.maxMarks !== undefined ? sub.maxMarks : '—';
-          const score = sub.score !== undefined ? sub.score : '—';
-          html += `<tr>
+        /* ============================================================
+           ～～～  DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING  ～～～
+           ============================================================ */
+
+        (function () {
+            // DOM refs
+            const input = document.getElementById('hallTicketInput');
+            const btn = document.getElementById('viewResultBtn');
+            const errorMsg = document.getElementById('errorMsg');
+            const resultCard = document.getElementById('resultCard');
+
+            // student info fields
+            const studentName = document.getElementById('studentName');
+            const studentHallTicket = document.getElementById('studentHallTicket');
+            const studentBatch = document.getElementById('studentBatch');
+            const studentSchool = document.getElementById('studentSchool');
+            const studentRank = document.getElementById('studentRank');
+            const studentTotal = document.getElementById('studentTotal');
+            const totalScoreFooter = document.getElementById('totalScoreFooter');
+            const marksTableBody = document.getElementById('marksTableBody');
+
+            // Calculate ranks automatically for all students based on total score
+            function calculateRanks() {
+                const studentList = Object.keys(results).map(key => {
+                    const student = results[key];
+                    let score = 0;
+                    if (student.totalScore) {
+                        const match = String(student.totalScore).match(/^(\d+(\.\d+)?)/);
+                        if (match) {
+                            score = parseFloat(match[1]);
+                        }
+                    } else if (Array.isArray(student.subjects)) {
+                        score = student.subjects.reduce((sum, s) => sum + (Number(s.score) || 0), 0);
+                    }
+                    return { key, score };
+                });
+
+                // Unique scores in descending order
+                const uniqueScores = Array.from(new Set(studentList.map(s => s.score)))
+                    .sort((a, b) => b - a);
+
+                const scoreToRank = {};
+                uniqueScores.forEach((score, index) => {
+                    scoreToRank[score] = index + 1;
+                });
+
+                studentList.forEach(({ key, score }) => {
+                    if (results[key].rank === undefined) {
+                        results[key].rank = scoreToRank[score];
+                    }
+                });
+            }
+
+            calculateRanks();
+
+            // Helper: clear error & hide result
+            function resetUI() {
+                errorMsg.classList.remove('show');
+                resultCard.classList.remove('show');
+            }
+
+            // Render result for a given hall ticket
+            function renderResult(hallTicket) {
+                const student = results[hallTicket];
+                if (!student) {
+                    // show error
+                    errorMsg.classList.add('show');
+                    resultCard.classList.remove('show');
+                    return;
+                }
+
+                // hide error, show card
+                errorMsg.classList.remove('show');
+                resultCard.classList.add('show');
+
+                // --- fill student info ---
+                studentName.textContent = student.name || '—';
+                studentHallTicket.textContent = hallTicket;
+                studentBatch.textContent = student.batch || '—';
+                studentSchool.textContent = student.schoolName || '—';
+
+                // --- rank ---
+                const rankVal = student.rank !== undefined ? student.rank : '—';
+                studentRank.textContent = rankVal !== '—' ? rankVal : '—';
+                studentRank.className = 'value highlight rank-highlight';
+                if (rankVal === 1) {
+                    studentRank.classList.add('rank-1');
+                } else if (rankVal === 2) {
+                    studentRank.classList.add('rank-2');
+                } else if (rankVal === 3) {
+                    studentRank.classList.add('rank-3');
+                }
+
+                const totalDisplay = student.totalScore || '—';
+                studentTotal.textContent = totalDisplay;
+                totalScoreFooter.textContent = totalDisplay;
+
+                // --- build marks table ---
+                const subjects = student.subjects || [];
+                let html = '';
+                if (subjects.length === 0) {
+                    html = `<tr><td colspan="3" style="text-align:center; color:#6b7f93;">No subject data</td></tr>`;
+                } else {
+                    subjects.forEach(sub => {
+                        const subjectName = sub.subject || '—';
+                        const maxMarks = sub.maxMarks !== undefined ? sub.maxMarks : '—';
+                        const score = sub.score !== undefined ? sub.score : '—';
+                        html += `<tr>
             <td class="subject-cell">${subjectName}</td>
             <td>${maxMarks}</td>
             <td class="score-cell">${score}</td>
           </tr>`;
-        });
-      }
-      marksTableBody.innerHTML = html;
-    }
+                    });
+                }
+                marksTableBody.innerHTML = html;
+            }
 
-    // Handle search
-    function handleSearch() {
-      const raw = input.value.trim();
-      if (raw === '') {
-        // if empty, hide result & show error? we choose to show error
-        errorMsg.textContent = 'Please enter a Hall Ticket Number.';
-        errorMsg.classList.add('show');
-        resultCard.classList.remove('show');
-        return;
-      }
-      // reset error text to default
-      errorMsg.textContent = 'No result found for this Hall Ticket Number.';
-      renderResult(raw);
-    }
+            // Handle search
+            function handleSearch() {
+                const raw = input.value.trim();
+                if (raw === '') {
+                    // if empty, hide result & show error? we choose to show error
+                    errorMsg.textContent = 'Please enter a Hall Ticket Number.';
+                    errorMsg.classList.add('show');
+                    resultCard.classList.remove('show');
+                    return;
+                }
+                // reset error text to default
+                errorMsg.textContent = 'No result found for this Hall Ticket Number.';
 
-    // Event listeners
-    btn.addEventListener('click', handleSearch);
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        handleSearch();
-      }
-    });
+                // Match exact or case-insensitive
+                let targetKey = raw;
+                if (!results[targetKey]) {
+                    const found = Object.keys(results).find(k => k.toUpperCase() === raw.toUpperCase());
+                    if (found) targetKey = found;
+                }
+                renderResult(targetKey);
+            }
 
-    // On page load: don't show any result, just the empty search box
-    // with its hint text ("Enter Hall Ticket Number").
-    resetUI();
-  })();
-</script>
+            // Event listeners
+            btn.addEventListener('click', handleSearch);
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleSearch();
+                }
+            });
+
+            // On page load: don't show any result, just the empty search box
+            // with its hint text ("Enter Hall Ticket Number").
+            resetUI();
+        })();
+    </script>
 </body>
+
 </html>
